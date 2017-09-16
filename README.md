@@ -3,7 +3,7 @@
 Heading
 Name the product in a way the reader (i.e. your target customers) will understand.
 
-Q Me
+Q
 
 Sub-Heading
 Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
