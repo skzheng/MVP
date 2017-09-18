@@ -19,11 +19,6 @@ app.get('/1', function(req,res){
   .then(function(questions){
     res.send(questions);
   });
-  // .then( 
-  //  console.log('hey')
-  // //   )
-  // res.writeHead(200);
-  // res.end(data);
 })
 
 app.post('/1', function(req,res){
@@ -32,9 +27,28 @@ app.post('/1', function(req,res){
 
   Questions.create({ question: question, answer:answer}, function(err,question){
     if(err) return err;
+  });
+})
+
+app.put('/1', function(req,res){
+  var id = req.body.id;
+  Questions.findById({_id:id}, function(err, question){
+    if(err) res.status(404).send('Could not find question')
+      else {
+        question.question = req.body.question || question.question;
+        question.answer = req.body.answer || question.answer; 
+        question.save()
+        res.send('Question updated')
+      }
   })
-  // Post info to the Database;
-  res.end('hello');
+})
+
+app.delete('/1', function(req, res){
+  var id = req.body.id;
+  Questions.findOneAndRemove({_id:id}, function(err,question){
+    if(err) res.status(404).send('Could not find question')
+    else res.send('Question deleted')
+  })
 })
 
 app.use(webpackDevMiddleware(compiler, {
